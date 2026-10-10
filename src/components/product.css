@@ -1,0 +1,67 @@
+/* Add inside your <style> tag or a .css file */
+
+@keyframes spin-ring {
+  to { transform: rotate(1turn); }
+}
+
+/* Wrapper pill */
+.btn-ring {
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px;
+  padding: 2px;           /* border thickness */
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+/* Spinning conic border — must be BIGGER than the pill */
+.btn-ring::before {
+  content: '';
+  position: absolute;
+  /* center the oversized square */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300%;
+  height: 300%;
+  background: conic-gradient(
+    from 0deg,
+    #00c2cb 0deg,
+    transparent 120deg,
+    #00c2cb 240deg,
+    transparent 360deg
+  );
+  animation: spin-ring 3s linear infinite;
+  border-radius: 9999px;
+}
+
+.btn-ring:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px 5px rgba(0, 194, 203, 0.4);
+}
+.btn-ring:active {
+  transform: scale(0.97);
+}
+
+/* Inner button — sits above the pseudo-el */
+.btn-ring-inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #111c1d;
+  color: #fff;
+  border-radius: 9999px;
+  /* responsive padding */
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.btn-ring:hover .btn-ring-inner {
+  background: #162425;
+}
